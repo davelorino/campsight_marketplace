@@ -10,6 +10,7 @@ const postController = require('./controllers/post');
 const expressValidator = require("express-validator");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const userRoutes = require("./routes/user");
 
 
 dotenv.config();
@@ -31,6 +32,7 @@ app.use(bodyParser.json());
 app.use(morgan("dev"));
 app.use(expressValidator());
 app.use("/", postRoutes);
+app.use("/", userRoutes);
 app.use("/", authRoutes);
 app.use(function (err, req, res, next){
   if(err.name === 'UnauthorizedError'){
