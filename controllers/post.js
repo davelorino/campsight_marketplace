@@ -59,3 +59,41 @@ exports.postsByUser = (req, res) => {
   });
 };
 
+exports.postById = (req, res, next, id) => {
+  Post.findById(id)
+  .populate("postedBy", "_id name")
+  .exec((err, post) => {
+    if(err || !post) {
+      return res.status(200).json({
+        error: err
+      });
+    }
+    req.post = post;
+    next();
+  });
+};
+
+exports.isPoster = (req, res, next) => {
+  let isPoster = req.post && req.auth && req.post.postedBy._id == req.auth._id;
+  if(!isPoster) {
+    return res.status(403).json({
+      error: "User is not authorised"
+    });
+  }
+  next();
+};
+
+exports.deletePost = (req, res) => {
+  let post = req.
+  post.remove((err, post) => {
+    if (err) {
+      return res.status(400).json({
+        error: err
+      });
+    }
+    res.json({
+      message: "Post deleted successfully"
+    });
+  });
+};
+
