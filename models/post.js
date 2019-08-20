@@ -13,8 +13,8 @@ const postSchema = new mongoose.Schema({
     required: true
     },
     photo: {
-      type: Buffer,
-      contentType: String
+      data: Buffer,
+      contenType: String
     },
     postedBy: {
       type: ObjectId,

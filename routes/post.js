@@ -10,7 +10,7 @@ const {createPostValidator} = require("../validator");
 
 router.get("/", getPosts);
 router.post(
-    "/post/new/:userId",
+    "/post/:userId",
     requireSignin,
     createPost,
     createPostValidator
