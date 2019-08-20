@@ -9,7 +9,12 @@ const {createPostValidator} = require("../validator");
 
 
 router.get("/", getPosts);
-router.post("/post", requireSignin, createPostValidator, createPost);
+router.post(
+    "/post/new/:userId",
+    requireSignin,
+    createPost,
+    createPostValidator
+);
 
 
 // any route containing :userId, our app will first execute userById()
