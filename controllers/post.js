@@ -97,3 +97,19 @@ exports.deletePost = (req, res) => {
   });
 };
 
+exports.updatePost = (req, res, next) => {
+  let post = req.post;
+  post = _.extend(post, req.body);
+  post.updated = date.now();
+  post.save(err => {
+    if(err) {
+      return res.status(400).json({
+        error: err
+      });
+    }
+    res.json(post);
+  });
+};
+
+
+
